@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 
-void main(){
-  runApp(Aplication());
-}
+void main() => runApp(Aplication());
 
 class Aplication extends StatelessWidget {
   @override
@@ -14,7 +12,7 @@ class Aplication extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF2F008E),
         accentColor: Color(0xFFFDD303),
-      ),
+      )
     );
   }
 }

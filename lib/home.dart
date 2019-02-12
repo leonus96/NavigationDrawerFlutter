@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
+import 'import.dart';
+import 'gallery.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  HomeState createState() => HomeState();
+}
+
+class HomeState extends State<Home> {
+  int _selectDrawerIndex = 0;
+
+  _getDrawerItemWidget(int pos) {
+    switch(pos){
+      case 0: return Import();
+      case 1: return Gallery();
+    }
+  }
+
+  _onSelectItem(int pos) {
+    setState(() => _selectDrawerIndex = pos);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,29 +27,33 @@ class Home extends StatelessWidget {
       ),
       drawer: Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            UserAccountsDrawerHeader(
+              accountName: Text('Joseph León'),
+              accountEmail: Text('joseph@tera.pe'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.blue,
+                child: Text("J", style: TextStyle(fontSize: 40.0),),
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('Import'),
+              leading: Icon(Icons.import_export),
               onTap: (){
-
+                _onSelectItem(0);
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('Gallery'),
+              leading: Icon(Icons.photo),
               onTap: (){
-                
+                _onSelectItem(1);
               },
             )
           ],
         ),
       ),
+      body: _getDrawerItemWidget(_selectDrawerIndex),
     );
   }
 }
